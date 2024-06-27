@@ -19,9 +19,13 @@ const utils = new Utility({
   })
 })
 
+type EntryMode = "ADD" | "UPDATE"
+
 const configuration = utils.getSDKConfiguration();
 const logger = utils.getLogger();
 const pricelistClient = new PriceListEntriesApi(configuration)
+
+const ENTRY_MODE: EntryMode = "ADD"
 
 async function main() {
   const csv = require('csvtojson')
@@ -68,8 +72,16 @@ async function main() {
 
     if (priceListEntryPayload.length > 0) {
       try {
-        const uploadedPriceListEntries = await pricelistClient.bulkAddPriceListEntries({ allowPartialSuccess: true, priceListEntry: priceListEntryPayload })
-        logger.log(`Uploaded pricelist.`)
+
+        if (ENTRY_MODE == "ADD") {
+          const uploadedPriceListEntries = await pricelistClient.bulkAddPriceListEntries({ allowPartialSuccess: true, priceListEntry: priceListEntryPayload })
+          logger.log(`Added pricelist entries.`)
+        }
+
+        if (ENTRY_MODE == "UPDATE") {
+          const uploadedPriceListEntries = await pricelistClient.bulkUpdatePriceListEntries({ allowPartialSuccess: true, priceListEntry: priceListEntryPayload })
+          logger.log(`Updated pricelist entries.`)
+        }
 
       } catch (e: any) {
         logger.log(JSON.stringify(e.apiError))
