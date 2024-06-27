@@ -1,0 +1,20 @@
+{
+  "name": "upload-pricelist-entry",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@kibocommerce/rest-sdk": "^1.0.0",
+    "@types/needle": "^3.3.0",
+    "bottleneck": "^2.19.5",
+    "csvtojson": "^2.0.10",
+    "needle": "^3.3.1",
+    "winston": "^3.12.0"
+  }
+}
