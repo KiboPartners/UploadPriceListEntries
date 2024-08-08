@@ -138,7 +138,8 @@ function createPriceListEntryStore(priceListEntries: any) {
 async function iterateWithWindow(arr: any[], windowSize: number, uploadPricelistFunc: any) {
   const actualWindowSize = Math.min(windowSize, arr.length);
 
-  for (let i = 0; i <= arr.length - actualWindowSize; i++) {
+
+  for (let i = 0; i <= arr.length; i += actualWindowSize) {
     const endIndex = i + actualWindowSize;
     const subsection = arr.slice(i, endIndex);
     await uploadPricelistFunc(subsection);
